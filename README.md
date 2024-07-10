@@ -12,10 +12,22 @@ https://arduino.github.io/arduino-cli/
 $ arduino-cli core install arduino:mbed_nano
 ```
 
+### Create Arduino Library Directory
+```bash
+$ mkdir -p ~/Arduino/libraries
+```
+
 ### Install Libraries
 ```bash
 $ arduino-cli lib install Arduino_LSM9DS1
 $ arduino-cli lib install ArduinoBLE
+$ arduino-cli lib install Harvard_TinyMLx
+```
+
+### Install TensorFlow Lite Micro
+
+```bash
+$ git clone https://github.com/tensorflow/tflite-micro-arduino-examples/tree/main ~/Arduino
 ```
 
 ## Usage
@@ -38,5 +50,10 @@ The board needs to be in the bootloader before uploading the sketch. Double tap
 the RST button to put the device into the bootloader.
 
 ```bash
-$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:mbed_nano:nano33ble <sketch>
+$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:mbed_nano:nano33ble <sketch.ino>
 ```
+
+## Resources
+
+- https://www.tensorflow.org/lite/microcontrollers
+- https://github.com/tensorflow/tflite-micro-arduino-examples/
