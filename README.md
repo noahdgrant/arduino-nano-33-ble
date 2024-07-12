@@ -21,7 +21,6 @@ $ mkdir -p ~/Arduino/libraries
 ```bash
 $ arduino-cli lib install Arduino_LSM9DS1
 $ arduino-cli lib install ArduinoBLE
-$ arduino-cli lib install Harvard_TinyMLx
 ```
 
 ### Install TensorFlow Lite Micro
