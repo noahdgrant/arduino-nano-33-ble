@@ -1,0 +1,9 @@
+micro_features_model.cpp
+	- array
+	- array size
+micro_features_model_settings.h
+	- kCategoryCount
+micro_features_model_settings.cpp
+	- kCategoryLabels
+arduino_command_responder.cpp (arduino_detection_responder.cpp)
+	- what to do when each command is heard

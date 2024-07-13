@@ -50,6 +50,7 @@ the RST button to put the device into the bootloader.
 
 ```bash
 $ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:mbed_nano:nano33ble <sketch.ino>
+$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:mbed_nano:nano33ble <sketch.ino> --input-file <file>
 ```
 
 ## Resources
