@@ -194,12 +194,10 @@ void loop() {
     return;
   }
 
-  bool heardYes = RespondToKWS(error_reporter, found_command, is_new_command, score);
+  bool heardKW = RespondToKWS(error_reporter, found_command, is_new_command, score);
 
-  if(heardYes){
-    //Our keyword spotting model heard 'yes' so we detect if a person is visible 
-    
-     // Get image from provider.
+  if(heardKW){
+    // Get image from provider.
     if (kTfLiteOk != GetImage(error_reporter, kNumCols, kNumRows, kNumChannels,
                               vww_input->data.int8)) {
       TF_LITE_REPORT_ERROR(error_reporter, "Image capture failed.");
@@ -213,6 +211,17 @@ void loop() {
     // Process the inference results.
     int8_t person_score = vww_output->data.uint8[kPersonIndex];
     int8_t no_person_score = vww_output->data.uint8[kNotAPersonIndex];
-    RespondToDetection(error_reporter, person_score, no_person_score);
+    bool person_present = RespondToDetection(error_reporter, person_score,
+                                             no_person_score);
+
+    if (person_present) {
+      if (found_command[0] == 'o') {
+        TF_LITE_REPORT_ERROR(error_reporter, "one");
+      } else if (found_command[0] == 't' && found_command[1] == 'w'){
+        TF_LITE_REPORT_ERROR(error_reporter, "two");
+      } else if (found_command[0] == 't' && found_command[1] == 'h'){
+        TF_LITE_REPORT_ERROR(error_reporter, "three");
+      }
+    }
   }
 }

@@ -72,7 +72,7 @@ bool RespondToKWS(tflite::ErrorReporter* error_reporter, const char* found_comma
 
 
 // Flash the blue LED after each inference
-void RespondToDetection(tflite::ErrorReporter* error_reporter,
+bool RespondToDetection(tflite::ErrorReporter* error_reporter,
                         int8_t person_score, int8_t no_person_score) {
   if (!is_initialized) {
     // Pins for the built-in RGB LEDs on the Arduino Nano 33 BLE Sense
@@ -81,6 +81,8 @@ void RespondToDetection(tflite::ErrorReporter* error_reporter,
     pinMode(LEDB, OUTPUT);
     is_initialized = true;
   }
+
+  bool person_present = false;
 
   // Note: The RGB LEDs on the Arduino Nano 33 BLE
   // Sense are on when the pin is LOW, off when HIGH.
@@ -95,13 +97,17 @@ void RespondToDetection(tflite::ErrorReporter* error_reporter,
   if (person_score > no_person_score) {
     digitalWrite(LEDG, LOW);
     digitalWrite(LEDR, HIGH);
+    person_present = true;
   } else {
     digitalWrite(LEDG, HIGH);
     digitalWrite(LEDR, LOW);
+    person_present = false;
   }
 
   TF_LITE_REPORT_ERROR(error_reporter, "Person score: %d No person score: %d",
                        person_score, no_person_score);
+
+  return person_present;
 }
 
 #endif  // ARDUINO_EXCLUDE_CODE
